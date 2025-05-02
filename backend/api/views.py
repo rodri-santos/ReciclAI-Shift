@@ -30,6 +30,10 @@ from rest_framework.parsers import MultiPartParser
 from transformers import AutoImageProcessor, SiglipForImageClassification
 from PIL import Image
 import torch
+import pandas as pd
+import plotly.express as px
+from django.shortcuts import render
+from django.http import JsonResponse
 
 # Carregar modelo e processador uma única vez
 model_name = "prithivMLmods/Trash-Net"
@@ -94,8 +98,69 @@ class TrashClassificationView(APIView):
             "contentor": contentor
         })
     
-class RecyclingVisualizationView(APIView):
-    def get(self, request, *args, **kwargs):
-        # Aqui você pode implementar a lógica para retornar os dados de visualização
-        # Por exemplo, você pode retornar um gráfico ou dados em formato JSON
-        return Response({"message": "Recycling visualization data"})
+import plotly.express as px
+import pandas as pd
+import numpy as np
+from django.http import JsonResponse
+
+def recycling_map_view(request):
+    df = pd.read_csv('data/df.csv')  # Use '/' ao invés de '\'
+
+    # Preparando os dados para o gráfico
+    fig = px.choropleth(
+        df,
+        locations="Country",
+        locationmode="country names",
+        color="Value",
+        hover_name="Country",
+        animation_frame="Year",
+        color_continuous_scale="YlGn",
+        range_color=(df["Value"].min(), df["Value"].max()),
+    )
+
+    fig.update_geos(
+        scope="europe",
+        center={"lat": 55, "lon": 15},
+        domain=dict(y=[0.15, 1])
+    )
+
+    fig.update_layout(
+        title=dict(
+            text='Taxa de reciclagem de resíduos municipais na Europa',
+            x=0.5,
+            font=dict(family='Arial Black', size=16, color='black')
+        ),
+        height=500,
+        width=600,
+        margin=dict(t=50, b=30),
+        plot_bgcolor='whitesmoke',
+        font=dict(size=10),
+        coloraxis_colorbar=dict(
+            len=0.8,
+            thickness=20,
+            y=0.6,
+            title='Taxa'
+        ),
+        sliders=[{'y': 0.4}],
+    )
+
+    # Extraindo os dados do gráfico
+    graph_data = fig.to_dict()
+
+    # Convertendo objetos não serializáveis (como np.ndarray) em listas
+    def convert_to_serializable(data):
+        if isinstance(data, dict):
+            return {key: convert_to_serializable(value) for key, value in data.items()}
+        elif isinstance(data, list):
+            return [convert_to_serializable(item) for item in data]
+        elif isinstance(data, np.ndarray):
+            return data.tolist()  # Converte numpy.ndarray em lista
+        else:
+            return data
+
+    # Converter os dados para um formato serializável em JSON
+    graph_data = fig.to_dict()
+    graph_data_serializable = convert_to_serializable(graph_data)
+
+    # Retornar os dados como JSON
+    return JsonResponse({'graph_data': graph_data_serializable})

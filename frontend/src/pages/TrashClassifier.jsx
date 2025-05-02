@@ -51,12 +51,11 @@ const TrashClassifier = () => {
 
       {/* Banner */}
       <div
-  className="bannerBar"
-  style={{ backgroundImage: `url(${bannerLong})` }}
-></div>
+        className="bannerBar"
+        style={{ backgroundImage: `url(${bannerLong})` }}
+      ></div>
 
       <div className="max-w-xl mx-auto p-6 rounded-xl shadow-lg bg-white space-y-4">
-
         <div className="uploadPaper">
           <input type="file" accept="image/*" onChange={handleImageChange} />
           {preview && (
@@ -85,9 +84,15 @@ const TrashClassifier = () => {
 
             <div className="resultTitle">Probabilidades completas:</div>
             <ul>
-              {Object.entries(result.classificacao).map(([label, prob]) => (
-                <li key={label}>{label}: <strong>{(prob * 100).toFixed(1)}%</strong></li>
-              ))}
+              {/* Ordena as probabilidades antes de exibir */}
+              {Object.entries(result.classificacao)
+                .sort((a, b) => b[1] - a[1])  // Ordena do maior para o menor
+                .map(([label, prob]) => (
+                  <li key={label}>
+                    {label}: <strong>{(prob * 100).toFixed(1)}%</strong>
+                  </li>
+                ))
+              }
             </ul>
           </div>
         )}

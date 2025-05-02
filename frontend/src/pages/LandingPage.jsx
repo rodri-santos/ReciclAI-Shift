@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '/src/styles/LandingPage.css';
 import bannerImage from '/src/assets/Logo.png';
@@ -17,10 +18,7 @@ const LandingPage = () => {
       </div>
 
       {/* Banner */}
-      <div
-        className="banner"
-        style={{ backgroundImage: `url(${bannerImage})` }}
-      ></div>
+      <div className="banner" style={{ backgroundImage: `url(${bannerImage})` }}></div>
 
       {/* Card Central */}
       <div className="cardCentral">
@@ -48,13 +46,6 @@ const LandingPage = () => {
             COMEÇAR
           </button>
         </div>
-      </div>
-
-      {/* Sugestões / Contato */}
-      <div className="sugestoesPaper">
-        <h2 className="sugestoesTitle">Dúvidas ou Sugestões?</h2>
-        <input type="text" placeholder="Escreva a sua mensagem" className="sugestoesInput" />
-        <button className="sugestoesBtn">Enviar</button>
       </div>
     </div>
   );

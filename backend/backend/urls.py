@@ -29,6 +29,7 @@ router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    #path('api/', include('api.urls')),
     path('classify/', TrashClassificationView.as_view(), name='classify-trash'),
     path('recycling/', recycling_map_view, name='recycling'),
 ]

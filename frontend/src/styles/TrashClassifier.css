@@ -1,137 +1,173 @@
 /* Banner */
 .bannerBar {
-    width: 100%;
-    height: 250px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 40px;
+  width: 100%;
+  height: 280px;
+  background-size: cover;
+  background-position: calc(100% + 15px) center;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 50px;
+  border: 1px solid rgba(14, 124, 97, 0.1);
+}
+
+/* Estilo da imagem de preview */
+.previewImg {
+  width: 35%;
+  max-height: 220px;
+  object-fit: contain;
+  margin: 30px auto 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.previewImg:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Paper de Upload */
+.uploadPaper {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  padding: 50px;
+  text-align: center;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(14, 124, 97, 0.1);
+}
+
+.uploadPaper input[type="file"] {
+  display: block;
+  margin: 0 auto 30px;
+  padding: 16px;
+  border: 2px solid #0E7C61;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #f0f8ff;
+  max-width: 100%;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.uploadPaper input[type="file"]:hover {
+  background-color: #e3f2fd;
+  border-color: #0b634d;
+}
+
+.updateBtn {
+  background-color: #0E7C61;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 16px 60px;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(14, 124, 97, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 40px;
+}
+
+.updateBtn:hover {
+  background-color: #0b634d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(14, 124, 97, 0.4);
+}
+
+.updateBtn:disabled {
+  background-color: #8ba69c;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Resultados */
+.resultPaper {
+  background-color: white;
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  margin-top: 50px;
+  border: 1px solid rgba(14, 124, 97, 0.1);
+}
+
+.resultTitle {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #0E7C61;
+  margin-bottom: 20px;
+}
+
+.resultText {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.resultText strong {
+  font-weight: bold;
+  color: #0E7C61;
+}
+
+/* Lista de probabilidades */
+ul {
+  text-align: left;
+  margin-top: 20px;
+  list-style-type: disc;
+  padding-left: 40px;
+}
+
+ul li {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .bannerBar {
+      height: 220px;
+      margin-bottom: 30px;
   }
-  
-  /* Estilo da imagem de preview */
+
   .previewImg {
-    width: 30%;
-    max-height: 200px; /* Limita a altura */
-    object-fit: contain;
-    margin: 20px auto 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }  
-  
-  /* Paper de Upload */
+      width: 90%;
+      max-height: 200px;
+  }
+
   .uploadPaper {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column; /* força os elementos a alinhar verticalmente */
-    align-items: center; /* centra horizontalmente */
+      padding: 30px;
+      margin-bottom: 30px;
   }
-  
-  .uploadPaper input[type="file"] {
-    display: block;
-    margin: 0 auto 20px;
-    padding: 12px;
-    border: 2px solid #1976D2;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #f0f8ff;
-    max-width: 100%;  /* Garantir que o input de arquivo não ultrapasse a largura do banner */
-  }
-  
+
   .updateBtn {
-    background-color: #4CAF50;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 700;
-    padding: 12px 48px;
-    border-radius: 12px;
-    border: none;
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    margin-top: 40px; /* <- aqui aumentaste de 20px para 40px */
-  }
-  
-  
-  .updateBtn:hover {
-    background-color: #388E3C;
-    box-shadow: 0 4px 16px rgba(76, 175, 80, 0.2);
-  }
-  
-  .updateBtn:disabled {
-    background-color: #a5d6a7;
-    cursor: not-allowed;
-  }
-  
-  /* Resultados */
-  .resultPaper {
-    background-color: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 40px;
-  }
-  
-  .resultTitle {
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #1976D2;
-    margin-bottom: 10px;
-  }
-  
-  .resultText {
-    font-size: 1.1rem;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .resultText strong {
-    font-weight: bold;
-  }
-  
-  /* Lista de probabilidades */
-  ul {
-    text-align: left;
-    margin-top: 10px;
-    list-style-type: disc;
-    padding-left: 40px;
-  }
-  
-  ul li {
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  /* Responsividade */
-  @media (max-width: 768px) {
-    .bannerBar {
-      height: 200px;
-    }
-  
-    .previewImg {
-      width: 100%;  /* Ajustar a imagem para a largura completa */
-    }
-  
-    .uploadPaper {
-      padding: 20px;
-    }
-  
-    .updateBtn {
       width: 100%;
-    }
-  
-    .resultPaper {
-      padding: 20px;
-    }
+      padding: 16px;
   }
-  
+
+  .resultPaper {
+      padding: 30px;
+      margin-top: 30px;
+  }
+
+  .resultTitle {
+      font-size: 1.3rem;
+  }
+
+  .resultText {
+      font-size: 1.1rem;
+  }
+}

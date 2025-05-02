@@ -12,6 +12,7 @@ const LandingPage = () => {
         <div className="navLinks">
           <button onClick={() => navigate('/')} className="navLink">Home</button>
           <button onClick={() => navigate('/classify')} className="navLink">Classificador</button>
+          <button onClick={() => navigate('/recycling')} className="navLink">Reciclagem</button>
         </div>
       </div>
 

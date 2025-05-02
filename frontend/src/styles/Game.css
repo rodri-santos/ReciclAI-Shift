@@ -1,0 +1,110 @@
+/* Estilo geral do jogo */
+.game-container {
+    min-height: 100vh;
+    background-color: #f7fafc;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .game-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  .score {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #4a5568;
+  }
+  
+  /* Lista de itens de lixo */
+  .trash-list {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  
+  .trash-item {
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    border: 2px solid #e2e8f0;
+    cursor: grab;
+    transition: all 0.3s ease;
+    font-size: 1.25rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .trash-item:hover {
+    transform: scale(1.05);
+    background-color: #edf2f7;
+  }
+  
+  .trash-item:active {
+    cursor: grabbing;
+  }
+  
+  /* Contentores (lixeira) */
+  .bins-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  
+  .bin {
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .bin:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .bin-label {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .bg-blue-400 {
+    background-color: #3182ce;
+  }
+  
+  .bg-yellow-300 {
+    background-color: #ecc94b;
+  }
+  
+  .bg-green-400 {
+    background-color: #48bb78;
+  }
+  
+  /* Feedback visual */
+  .feedback {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+  }
+  
+  .correct {
+    color: #38a169;
+  }
+  
+  .wrong {
+    color: #e53e3e;
+  }
+  

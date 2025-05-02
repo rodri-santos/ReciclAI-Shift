@@ -5,6 +5,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TrashClassifier from './pages/TrashClassifier';
 import LandingPage from './pages/LandingPage';
+/*import RecyclingVisualization from './pages/RecyclingVisualization';*/
 
 function App() {
   return (

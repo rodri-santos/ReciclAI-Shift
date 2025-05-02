@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import '/src/styles/TrashClassifier.css';
+import bannerLong from '/src/assets/Logo.png';  // Banner longo
 
 const TrashClassifier = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -35,32 +39,58 @@ const TrashClassifier = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 rounded-xl shadow-lg bg-white space-y-4">
-      <h1 className="text-xl font-bold">Classificador de Lixo</h1>
-
-      <input type="file" accept="image/*" onChange={handleImageChange} />
-      {preview && <img src={preview} alt="Preview" className="w-64 h-64 object-cover rounded-md" />}
-
-      <button
-        onClick={handleUpload}
-        className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
-        disabled={loading}
-      >
-        {loading ? 'A classificar...' : 'Classificar'}
-      </button>
-
-      {result && (
-        <div className="mt-4">
-          <h2 className="text-lg font-semibold mb-2">Resultados:</h2>
-          <ul className="list-disc ml-5">
-            {Object.entries(result).map(([label, prob]) => (
-              <li key={label}>
-                {label}: <strong>{(prob * 100).toFixed(1)}%</strong>
-              </li>
-            ))}
-          </ul>
+    <div>
+      {/* Barra de Navegação */}
+      <div className="navBar">
+        <div className="navLinks">
+          <button onClick={() => navigate('/')} className="navLink">Home</button>
+          <button onClick={() => navigate('/classify')} className="navLink">Classificador</button>
         </div>
-      )}
+      </div>
+
+      {/* Banner */}
+      <div
+  className="bannerBar"
+  style={{ backgroundImage: `url(${bannerLong})` }}
+></div>
+
+      <div className="max-w-xl mx-auto p-6 rounded-xl shadow-lg bg-white space-y-4">
+
+        <div className="uploadPaper">
+          <input type="file" accept="image/*" onChange={handleImageChange} />
+          {preview && (
+            <img
+              src={preview}
+              alt="Preview"
+              className="previewImg"
+            />
+          )}
+          <button
+            onClick={handleUpload}
+            className="updateBtn"
+            disabled={loading}
+          >
+            {loading ? 'A classificar...' : 'Classificar'}
+          </button>
+        </div>
+
+        {result && (
+          <div className="resultPaper">
+            <div className="resultTitle">Classe mais provável:</div>
+            <p className="resultText">{result.classe_mais_provavel}</p>
+
+            <div className="resultTitle">Contentor adequado:</div>
+            <p className="resultText">{result.contentor}</p>
+
+            <div className="resultTitle">Probabilidades completas:</div>
+            <ul>
+              {Object.entries(result.classificacao).map(([label, prob]) => (
+                <li key={label}>{label}: <strong>{(prob * 100).toFixed(1)}%</strong></li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -36,6 +36,15 @@ model_name = "prithivMLmods/Trash-Net"
 model = SiglipForImageClassification.from_pretrained(model_name)
 processor = AutoImageProcessor.from_pretrained(model_name)
 
+bin_mapping = {
+    "cardboard": "Contentor Azul (papel/cartão)",
+    "paper": "Contentor Azul (papel/cartão)",
+    "glass": "Contentor Verde (vidro)",
+    "metal": "Contentor Amarelo (embalagens)",
+    "plastic": "Contentor Amarelo (embalagens)",
+    "trash": "Contentor Cinzento (lixo indiferenciado)"
+}
+
 # Dicionário de rótulos
 labels = {
     0: "cardboard",
@@ -61,5 +70,32 @@ class TrashClassificationView(APIView):
             outputs = model(**inputs)
             probs = torch.nn.functional.softmax(outputs.logits, dim=1).squeeze().tolist()
 
+        # Gera as previsões com percentagens
         predictions = {labels[i]: round(probs[i], 3) for i in range(len(probs))}
-        return Response(predictions)
+
+        # Descobre a classe com maior probabilidade
+        predicted_label = labels[torch.argmax(outputs.logits).item()]
+
+        # Mapeia a classe ao contentor
+        bin_mapping = {
+            "cardboard": "Contentor Azul",
+            "paper": "Contentor Azul",
+            "glass": "Contentor Verde",
+            "metal": "Contentor Amarelo",
+            "plastic": "Contentor Amarelo",
+            "trash": "Contentor Normal (lixo indiferenciado)"
+        }
+
+        contentor = bin_mapping.get(predicted_label, "Desconhecido")
+
+        return Response({
+            "classificacao": predictions,
+            "classe_mais_provavel": predicted_label,
+            "contentor": contentor
+        })
+    
+class RecyclingVisualizationView(APIView):
+    def get(self, request, *args, **kwargs):
+        # Aqui você pode implementar a lógica para retornar os dados de visualização
+        # Por exemplo, você pode retornar um gráfico ou dados em formato JSON
+        return Response({"message": "Recycling visualization data"})

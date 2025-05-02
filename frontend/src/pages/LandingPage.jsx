@@ -1,18 +1,60 @@
 import { useNavigate } from 'react-router-dom';
+import '/src/styles/LandingPage.css';
+import bannerImage from '/src/assets/Logo.png';
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-green-100 text-center p-8">
-      <h1 className="text-4xl font-bold mb-4">Bem-vindo ao ReciclAI ♻️</h1>
-      <p className="text-lg mb-8">Classifica o teu lixo e descobre para onde deve ir.</p>
-      <button
-        onClick={() => navigate('/classify')}
-        className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
-      >
-        Começar a Classificar
-      </button>
+    <div>
+      {/* Barra de Navegação sem fundo */}
+      <div className="navBar">
+        <div className="navLinks">
+          <button onClick={() => navigate('/')} className="navLink">Home</button>
+          <button onClick={() => navigate('/classify')} className="navLink">Classificador</button>
+        </div>
+      </div>
+
+      {/* Banner */}
+      <div
+        className="banner"
+        style={{ backgroundImage: `url(${bannerImage})` }}
+      ></div>
+
+      {/* Card Central */}
+      <div className="cardCentral">
+        <h1 className="cardTitle">ReciclAI</h1>
+        <p className="cardDesc">Descrição do que fazemos</p>
+      </div>
+
+      {/* Como Funciona */}
+      <div>
+        <h2 className="stepsTitle">Como Funciona?</h2>
+        <div className="stepsContainer">
+          <div className="stepCard">
+            <p><strong>Passo 1</strong><br />Descrição</p>
+          </div>
+          <div className="stepCard">
+            <p><strong>Passo 2</strong><br />Descrição</p>
+          </div>
+          <div className="stepCard">
+            <p><strong>Passo 3</strong><br />Descrição</p>
+          </div>
+        </div>
+
+        <div style={{ textAlign: 'center' }}>
+          <button onClick={() => navigate('/classify')} className="comecarBtn">
+            COMEÇAR
+          </button>
+        </div>
+      </div>
+
+      {/* Sugestões / Contato */}
+      <div className="sugestoesPaper">
+        <h2 className="sugestoesTitle">Dúvidas ou Sugestões?</h2>
+        <input type="text" placeholder="Escreva a sua mensagem" className="sugestoesInput" />
+        <button className="sugestoesBtn">Enviar</button>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,227 @@
+/* Barra de Navegação sem fundo */
+.navBar {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10; /* Garantir que a barra fique no topo */
+    background-color: white; /* Adicionando cor de fundo branca */
+    border-bottom: 3px solid #1976D2; /* Linha embaixo da barra */
+  }
+  
+  .navLinks {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+  }
+  
+  .navLink {
+    background-color: transparent; /* Sem fundo */
+    color: #1976D2;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .navLink:hover {
+    background-color: rgba(25, 118, 210, 0.1); /* Cor de hover suave */
+  }
+  
+  .navLink:focus {
+    outline: none;
+  }
+  
+  /* Ajustes de Margin no Conteúdo para a Barra Ficar no Topo */
+  body {
+    margin-top: 80px; /* Compensa a altura da barra fixa */
+  }
+  
+  /* Restante do CSS */
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+  }
+  
+  /* Banner */
+  .banner {
+    width: 100%;
+    height: 350px;
+    background-position: center;
+    background-size: cover;
+    border-bottom: 6px solid #1976D2;
+  }
+  
+  /* Cartão Central */
+  .cardCentral {
+    text-align: center;
+    margin-top: -50px;
+    padding: 40px 0;
+  }
+  
+  .cardTitle {
+    font-size: 3rem;
+    color: #1976D2;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .cardDesc {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  /* Título de "Como Funciona?" */
+  .stepsTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 60px;
+    color: #1976D2;
+  }
+  
+  /* Contêiner de Passos */
+  .stepsContainer {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .stepCard {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    margin-bottom: 30px;
+    transition: transform 0.2s;
+  }
+  
+  .stepCard:hover {
+    transform: translateY(-10px);
+  }
+  
+  .stepCard p {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .stepCard strong {
+    font-size: 1.4rem;
+    color: #1976D2;
+  }
+  
+  /* Botão Começar */
+  .comecarBtn {
+    background-color: #1976D2;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 40px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .comecarBtn:hover {
+    background-color: #125ea2;
+  }
+  
+  /* Sugestões / Contato */
+  .sugestoesPaper {
+    background-color: white;
+    border-radius: 12px;
+    padding: 40px;
+    margin-top: 80px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .sugestoesTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1976D2;
+  }
+  
+  .sugestoesInput {
+    width: 80%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border 0.3s;
+  }
+  
+  .sugestoesInput:focus {
+    border-color: #1976D2;
+  }
+  
+  .sugestoesBtn {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sugestoesBtn:hover {
+    background-color: #388E3C;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .stepsContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .stepCard {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  
+    .comecarBtn {
+      width: 100%;
+      padding: 12px;
+    }
+  
+    .sugestoesInput {
+      width: 90%;
+    }
+  
+    .sugestoesBtn {
+      width: 100%;
+      padding: 12px;
+    }
+  
+    /* Ajuste da Barra de Navegação para telas menores */
+    .navLinks {
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+    }
+  }
+  

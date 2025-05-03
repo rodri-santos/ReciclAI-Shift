@@ -126,7 +126,7 @@ def recycling_map_view(request):
 
     fig.update_layout(
         title=dict(
-            text='Taxa de reciclagem de resíduos municipais na Europa',
+            text='Taxa de Reciclagem de Resíduos Municipais na Europa',
             x=0.5,
             font=dict(family='Arial Black', size=16, color='black')
         ),

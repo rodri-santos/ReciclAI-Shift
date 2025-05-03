@@ -1,0 +1,163 @@
+/* Importação da fonte */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
+
+/* Barra de Navegação */
+.navBar {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #ffffff;
+  border-bottom: 1.5px solid #0E7C61;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navLinks {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.navLink {
+  background-color: transparent;
+  color: #0E7C61;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navLink:hover {
+  background-color: rgba(14, 124, 97, 0.1);
+  transform: translateY(-2px);
+}
+
+.navLink:focus {
+  outline: none;
+}
+
+/* Ajustes de Margin no Conteúdo para a Barra Ficar no Topo */
+body {
+  margin-top: 80px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+/* Título Principal */
+h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2.8rem;
+  color: #0E7C61;
+  font-weight: 800;
+  margin: 60px 0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Conteúdo Principal */
+.max-w-xl {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Estilo do Gráfico */
+.plotly-graph-div {
+  width: 100%;
+  max-height: 500px;
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .navLinks {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navLink {
+    margin: 8px 0;
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    margin: 50px 0;
+  }
+
+  .max-w-xl {
+    padding: 20px;
+  }
+
+  .plotly-graph-div {
+    max-height: 400px;
+  }
+}
+
+.ecoTipsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 60px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.ecoTip {
+  flex: 1;
+  min-width: 280px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.ecoTip.blue {
+  background-color: #3B82F6;
+}
+
+.ecoTip.yellow {
+  background-color: #FACC15;
+  color: #333;
+}
+
+.ecoTip.green {
+  background-color: #10B981;
+}
+
+.ecoTip strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .ecoTipsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.pageContent {
+  padding-top: 100px;
+}

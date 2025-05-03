@@ -1,17 +1,33 @@
 /* Banner */
 .bannerBar {
+  width: 100vw;
+  height: 50px !important;
+  background-color: #6bc4a6b5;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 100px 0;
+  margin-top: -50px;
+}
+.bannerInner {
   width: 100%;
-  height: 280px;
+  max-width: 800px;
+  height: 60px;
+  margin-top: 40px !important;
+  margin: 0 auto;
+  background-position: center;
   background-size: cover;
-  background-position: calc(100% + 15px) center;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.301);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  margin-bottom: 50px;
-  border: 1px solid rgba(14, 124, 97, 0.1);
+}
+.bannerTitle {
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* Estilo da imagem de preview */
@@ -25,7 +41,6 @@
   transition: all 0.3s ease;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 .previewImg:hover {
   transform: scale(1.02);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
@@ -39,31 +54,139 @@
   padding: 50px;
   text-align: center;
   margin-bottom: 50px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid rgba(14, 124, 97, 0.1);
 }
 
-.uploadPaper input[type="file"] {
+.container {
+  --transition: 350ms;
+  --folder-W: 120px;
+  --folder-H: 80px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
+  background: linear-gradient(135deg, #6bc4a6, #0E7C61);
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  height: calc(var(--folder-H) * 1.7);
+  position: relative;
+}
+
+.folder {
+  position: absolute;
+  top: -20px;
+  left: calc(50% - 60px);
+  animation: float 2.5s infinite ease-in-out;
+  transition: transform var(--transition) ease;
+}
+
+.folder:hover {
+  transform: scale(1.05);
+}
+
+.folder .front-side,
+.folder .back-side {
+  position: absolute;
+  transition: transform var(--transition);
+  transform-origin: bottom center;
+}
+
+.folder .back-side::before,
+.folder .back-side::after {
+  content: "";
   display: block;
-  margin: 0 auto 30px;
-  padding: 16px;
-  border: 2px solid #0E7C61;
-  border-radius: 12px;
+  background-color: white;
+  opacity: 0.5;
+  z-index: 0;
+  width: var(--folder-W);
+  height: var(--folder-H);
+  position: absolute;
+  transform-origin: bottom center;
+  border-radius: 15px;
+  transition: transform 350ms;
+  z-index: 0;
+}
+
+.container:hover .back-side::before {
+  transform: rotateX(-5deg) skewX(5deg);
+}
+.container:hover .back-side::after {
+  transform: rotateX(-15deg) skewX(12deg);
+}
+
+.folder .front-side {
+  z-index: 1;
+}
+
+.container:hover .front-side {
+  transform: rotateX(-40deg) skewX(15deg);
+}
+
+.folder .tip {
+  background: linear-gradient(135deg, #ff9a56, #ff6f56);
+  width: 80px;
+  height: 20px;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: -10px;
+  z-index: 2;
+}
+
+.folder .cover {
+  background: linear-gradient(135deg, #ffe563, #ffc663);
+  width: var(--folder-W);
+  height: var(--folder-H);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.custom-file-upload {
+  font-size: 1.1em;
+  color: #ffffff;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  background-color: #f0f8ff;
-  max-width: 100%;
-  transition: all 0.3s ease;
-  font-size: 1.1rem;
-  color: #333;
+  transition: background var(--transition) ease;
+  display: inline-block;
+  width: 100px;
+  padding: 10px 35px;
+  position: relative;
 }
 
-.uploadPaper input[type="file"]:hover {
-  background-color: #e3f2fd;
-  border-color: #0b634d;
+.custom-file-upload:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
 
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+/* Botão de classificar */
 .updateBtn {
   background-color: #0E7C61;
   color: white;
@@ -75,15 +198,13 @@
   box-shadow: 0 4px 12px rgba(14, 124, 97, 0.3);
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 40px;
+  margin-top: 20px;
 }
-
 .updateBtn:hover {
   background-color: #0b634d;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(14, 124, 97, 0.4);
 }
-
 .updateBtn:disabled {
   background-color: #8ba69c;
   cursor: not-allowed;
@@ -101,21 +222,18 @@
   margin-top: 50px;
   border: 1px solid rgba(14, 124, 97, 0.1);
 }
-
 .resultTitle {
   font-weight: 700;
   font-size: 1.4rem;
   color: #0E7C61;
   margin-bottom: 20px;
 }
-
 .resultText {
   font-size: 1.2rem;
   color: #333;
   margin-bottom: 25px;
   line-height: 1.6;
 }
-
 .resultText strong {
   font-weight: bold;
   color: #0E7C61;
@@ -128,7 +246,6 @@ ul {
   list-style-type: disc;
   padding-left: 40px;
 }
-
 ul li {
   font-size: 1.1rem;
   color: #333;
@@ -138,36 +255,13 @@ ul li {
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .bannerBar {
-      height: 220px;
-      margin-bottom: 30px;
-  }
-
-  .previewImg {
-      width: 90%;
-      max-height: 200px;
-  }
-
-  .uploadPaper {
-      padding: 30px;
-      margin-bottom: 30px;
-  }
-
-  .updateBtn {
-      width: 100%;
-      padding: 16px;
-  }
-
-  .resultPaper {
-      padding: 30px;
-      margin-top: 30px;
-  }
-
-  .resultTitle {
-      font-size: 1.3rem;
-  }
-
-  .resultText {
-      font-size: 1.1rem;
-  }
+  .bannerBar { height: 220px; margin-bottom: 30px; }
+  .previewImg { width: 90%; max-height: 200px; }
+  .uploadPaper { padding: 30px; margin-bottom: 30px; }
+  .custom-file-upload { width: 100px; margin-top: -10px; }
+  .updateBtn { width: 100%; padding: 16px; }
+  .resultPaper { padding: 30px; margin-top: 30px; }
+  .resultTitle { font-size: 1.3rem; }
+  .resultText { font-size: 1.1rem; }
 }
+

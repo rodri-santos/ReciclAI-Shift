@@ -1,23 +1,23 @@
-/* Estilo geral do jogo */
-.game-container {
-  max-width: 1200px;
-  margin: 20px auto 50px;
-  padding: 20px;
-  text-align: center;
-  position: relative;
+/* Cabeçalho do jogo */
+.game-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
 }
 
 .game-title {
   font-family: 'Raleway', sans-serif;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #0E7C61;
-  margin-bottom: 20px;
+  margin: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .score {
   position: absolute;
-  top: 20px;
+  top: 50px;
   right: 20px;
   background-color: #0E7C61;
   color: white;
@@ -28,15 +28,43 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Lista de itens de lixo */
-.trash-list {
+
+/* Ajuste no padding-top da game-container para evitar sobreposição com a barra de navegação */
+.game-container {
+  max-width: 1200px;
+  margin: 20px auto 50px;
+  padding: 20px;
+  padding-top: 80px; /* Ajuste de acordo com a altura da barra de navegação */
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-align: center;
 }
 
+
+/* Lista de lixo com rolagem horizontal */
+.trash-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  scroll-behavior: smooth;
+}
+
+.trash-list::-webkit-scrollbar {
+  height: 8px;
+}
+.trash-list::-webkit-scrollbar-thumb {
+  background-color: #0E7C61;
+  border-radius: 4px;
+}
+.trash-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Itens de lixo */
 .trash-item {
   background-color: white;
   padding: 15px 25px;
@@ -48,15 +76,15 @@
   border: 2px solid #0E7C61;
   color: #0E7C61;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .trash-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   background-color: #f0f9f7;
 }
 
-/* Contentores (lixeira) */
+/* Contentores */
 .bins-container {
   display: flex;
   justify-content: center;
@@ -73,11 +101,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
   background-color: white;
+}
+
+.bin:hover {
+  transform: translateY(-5px);
 }
 
 .bin-image {
@@ -87,39 +118,19 @@
   margin-bottom: 10px;
 }
 
-.bin:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
-
 .bin-label {
-  color: #333;
   font-size: 1.3rem;
   font-weight: bold;
-  text-shadow: none;
+  color: #333;
 }
 
-.bg-blue-400 {
-  background-color: #3182ce;
-}
+/* Cores dos contentores */
+.bg-blue-400 { background-color: #3182ce; }
+.bg-yellow-300 { background-color: #ecc94b; }
+.bg-green-400 { background-color: #48bb78; }
+.bg-amber-700 { background-color: #A0522D; }
 
-.bg-yellow-300 {
-  background-color: #ecc94b;
-}
-
-.bg-green-400 {
-  background-color: #48bb78;
-}
-
-.bg-amber-700 {
-  background-color: #A0522D;
-}
-
-.bg-marrom {
-  background-color: #2F4538;
-}
-
-/* Feedback visual */
+/* Feedback */
 .feedback {
   position: fixed;
   top: 20%;
@@ -134,47 +145,17 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.feedback.correct {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.feedback.wrong {
-  background-color: #f44336;
-  color: white;
-}
+.feedback.correct { background-color: #4CAF50; color: white; }
+.feedback.wrong { background-color: #f44336; color: white; }
 
 @keyframes fadeInOut {
   0% { opacity: 0; transform: translate(-50%, -40%); }
-  20% { opacity: 1; transform: translate(-50%, -50%); }
-  40% { opacity: 1; transform: translate(-50%, -50%); }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
   100% { opacity: 0; transform: translate(-50%, -60%); }
 }
 
-@media (max-width: 768px) {
-  .game-container {
-    margin-top: 80px;
-  }
-
-  .game-title {
-    font-size: 2.5rem;
-  }
-
-  .trash-item {
-    padding: 12px 20px;
-    font-size: 1.1rem;
-  }
-
-  .bin {
-    width: 150px;
-    height: 150px;
-  }
-
-  .bin-label {
-    font-size: 1.1rem;
-  }
-}
-
+/* Fato educativo */
 .fact-banner {
   margin: 20px auto;
   padding: 20px;
@@ -193,12 +174,8 @@
 }
 
 @media (max-width: 768px) {
-  .fact-banner {
-    margin-top: 30px;
-    padding: 15px;
-  }
-
-  .fact-text {
-    font-size: 1.1rem;
-  }
+  .game-title { font-size: 2rem; }
+  .bin { width: 150px; height: 150px; }
+  .bin-label { font-size: 1.1rem; }
+  .trash-item { padding: 12px 20px; font-size: 1.1rem; }
 }

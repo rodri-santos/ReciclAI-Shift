@@ -8,10 +8,10 @@ import lixoOrganico from '/src/assets/lixoorganico.png';
 
 const trashItems = [
   { id: 1, name: 'Papel 🧻', type: 'papel' },
-  { id: 2, name: 'Garrafa de plástico 🧴', type: 'plastico' },
-  { id: 3, name: 'Garrafa de vidro 🍾', type: 'vidro' },
+  { id: 2, name: 'Garrafa Plástico 🧴', type: 'plastico' },
+  { id: 3, name: 'Garrafa Vidro 🍾', type: 'vidro' },
   { id: 4, name: 'Lata 🥫', type: 'plastico' },
-  { id: 5, name: 'Cartão 📦', type: 'plastico' },
+  { id: 5, name: 'Cartão 📦', type: 'papel' },
   { id: 6, name: 'Maçã Comida 🍎', type: 'organico' },
 ];
 
@@ -74,7 +74,6 @@ const Game = () => {
 
   return (
     <div>
-      {/* Barra de Navegação */}
       <div className="navBar">
         <div className="navLinks">
           <button onClick={() => navigate('/')} className="navLink">Home</button>
@@ -84,9 +83,11 @@ const Game = () => {
         </div>
       </div>
 
-      <div className="game-container">
-        <h1 className="game-title">♻️ Jogo da Reciclagem</h1>
-        <p className="score">Pontuação: <span className="font-semibold">{score}</span></p>
+      <div className="game-container" style={{ paddingTop: '80px' }}> {/* Ajuste o padding-top conforme necessário */}
+        <div className="game-header">
+          <h1 className="game-title">♻️ Jogo da Reciclagem</h1>
+          <p className="score">Pontuação: <span className="font-semibold">{score}</span></p>
+        </div>
 
         <div className="trash-list">
           {trashItems.map((item) => (
@@ -116,8 +117,8 @@ const Game = () => {
         </div>
 
         {feedback && (
-          <div 
-            key={Date.now()} 
+          <div
+            key={Date.now()}
             className={`feedback ${feedback === 'Correto!' ? 'correct' : 'wrong'}`}
           >
             {feedback}

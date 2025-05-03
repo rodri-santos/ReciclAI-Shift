@@ -272,6 +272,11 @@
   background-color: #0b634d;
   transform: translateY(-1px);
 }
+.emailInfo {
+  font-size: 14px;
+  color: black; /* Cor preta */
+  margin-top: 10px;
+}
 
   
   /* Responsividade */

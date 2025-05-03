@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '/src/styles/LandingPage.css';
 
@@ -25,7 +26,43 @@ const steps = [
 ];
 
 const LandingPage = () => {
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Verifica se há algo na mensagem
+    if (!message.trim()) {
+      alert('Por favor, escreva uma mensagem!');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // Envia a mensagem para a API backend (substitua a URL pelo endpoint correto)
+    try {
+      const response = await fetch('http://localhost:8000/api/suggestions/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message }),
+      });
+
+      if (response.ok) {
+        alert('Mensagem enviada com sucesso!');
+        setMessage('');
+      } else {
+        alert('Erro ao enviar a mensagem, tente novamente.');
+      }
+    } catch (error) {
+      alert('Erro de rede, tente novamente mais tarde.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div>
@@ -70,19 +107,25 @@ const LandingPage = () => {
         </button>
       </section>
 
-   
-
       {/* Sugestões / Contato */}
       <div className="sugestoesPaper">
         <h2 className="sugestoesTitle">Dúvidas ou Sugestões?</h2>
-        <div className="sugestoesForm">
+        
+        {/* Novo parágrafo com a mensagem */}
+        <p className="emailInfo">Coloca o teu Email para resposta</p>
+
+        <form onSubmit={handleSubmit} className="sugestoesForm">
           <input
             type="text"
-            placeholder="Escreva a sua mensagem"
+            placeholder="Escreve a tua mensagem"
             className="sugestoesInput"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
-          <button className="sugestoesBtn">Enviar</button>
-        </div>
+          <button type="submit" className="sugestoesBtn" disabled={isSubmitting}>
+            {isSubmitting ? 'Enviando...' : 'Enviar'}
+          </button>
+        </form>
       </div>
     </div>
   );

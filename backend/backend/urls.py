@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from tutorial.quickstart import views
-from api.views import TrashClassificationView, recycling_map_view
+from api.views import TrashClassificationView, recycling_map_view,SuggestionView
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -32,4 +32,5 @@ urlpatterns = [
     #path('api/', include('api.urls')),
     path('classify/', TrashClassificationView.as_view(), name='classify-trash'),
     path('recycling/', recycling_map_view, name='recycling'),
+    path('api/suggestions/', SuggestionView.as_view(), name='suggestion-api'),
 ]

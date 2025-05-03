@@ -6,6 +6,26 @@ from rest_framework import permissions, viewsets
 
 from tutorial.quickstart.serializers import GroupSerializer, UserSerializer
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Suggestion
+from .serializers import SuggestionSerializer
+
+class SuggestionView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Pega a mensagem diretamente dos dados da requisição
+        message = request.data.get('message', None)
+        
+        if not message:
+            return Response({"error": "Message is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Cria a sugestão sem o campo user
+        suggestion = Suggestion.objects.create(message=message)
+        
+        serializer = SuggestionSerializer(suggestion)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class UserViewSet(viewsets.ModelViewSet):
     """

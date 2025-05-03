@@ -1,7 +1,25 @@
-/* Importação da fonte */
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
+/* Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Raleway:wght@800&display=swap');
 
-/* Barra de Navegação */
+body {
+  margin-top: 80px;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2.8rem;
+  color: #0E7C61;
+  font-weight: 800;
+  margin: 60px 0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Navegação */
 .navBar {
   width: 100%;
   height: 80px;
@@ -44,27 +62,7 @@
   outline: none;
 }
 
-/* Ajustes de Margin no Conteúdo para a Barra Ficar no Topo */
-body {
-  margin-top: 80px;
-  font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
-  margin: 0;
-  padding: 0;
-}
-
-/* Título Principal */
-h1 {
-  font-family: 'Raleway', sans-serif;
-  font-size: 2.8rem;
-  color: #0E7C61;
-  font-weight: 800;
-  margin: 60px 0;
-  text-align: center;
-  letter-spacing: 1px;
-}
-
-/* Conteúdo Principal */
+/* Conteúdo principal */
 .max-w-xl {
   max-width: 1200px;
   margin: 0 auto;
@@ -75,7 +73,6 @@ h1 {
   text-align: center;
 }
 
-/* Estilo do Gráfico */
 .plotly-graph-div {
   width: 100%;
   max-height: 500px;
@@ -84,7 +81,7 @@ h1 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsividade */
+/* Responsivo */
 @media (max-width: 768px) {
   .navLinks {
     flex-direction: column;
@@ -109,8 +106,17 @@ h1 {
   .plotly-graph-div {
     max-height: 400px;
   }
+
+  .ecoTip p {
+    font-size: 1rem;
+  }
+
+  .ecoTip strong {
+    font-size: 1.1rem;
+  }
 }
 
+/* Eco Dicas */
 .ecoTipsContainer {
   display: flex;
   flex-wrap: wrap;
@@ -121,19 +127,46 @@ h1 {
   padding: 0 20px;
 }
 
+.ecoTipsGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
 .ecoTip {
   flex: 1;
   min-width: 280px;
   padding: 20px 24px;
   border-radius: 16px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-  color: white;
   font-size: 1rem;
   line-height: 1.6;
+  transition: all 0.3s ease;
+  color: white;
 }
 
-.ecoTip.blue {
-  background-color: #3B82F6;
+.ecoTip p,
+.ecoTip ul li {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: inherit;
+}
+
+.ecoTip strong {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.ecoTip.yellow strong {
+  color: #333;
 }
 
 .ecoTip.yellow {
@@ -141,23 +174,77 @@ h1 {
   color: #333;
 }
 
+.ecoTip.blue {
+  background-color: #3B82F6;
+}
+
 .ecoTip.green {
   background-color: #10B981;
 }
 
-.ecoTip strong {
+.ecoSubTitle {
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 6px;
   display: block;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
-  .ecoTipsContainer {
-    flex-direction: column;
-    align-items: center;
-  }
+.ecoTip ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 12px 0;
+}
+
+.ecoTip ul li {
+  padding-left: 1.5em;
+  text-indent: -1.2em;
+  margin-bottom: 6px;
+}
+
+.ecoTip ul li::before {
+  content: '•';
+  color: currentColor;
+  margin-right: 8px;
+}
+
+.ecoTipsGroup:hover .ecoTip {
+  filter: blur(3px);
+  transform: scale(0.98);
+  opacity: 0.7;
+}
+
+.ecoTip:hover {
+  filter: none !important;
+  transform: scale(1.02) !important;
+  opacity: 1 !important;
+  z-index: 1;
 }
 
 .pageContent {
   padding-top: 100px;
 }
+
+.recyclingIntro {
+  background-color: #f4fbf7;
+  color: #0E7C61;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 20px 30px;
+  border-radius: 16px;
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.introImage {
+  width: 120px;  /* Agora a imagem terá 120px de largura */
+  height: auto;
+  margin: 20px 0; /* Espaço entre a imagem e o texto */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+

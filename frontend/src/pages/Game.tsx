@@ -7,12 +7,24 @@ import ecopontoVerde from '/src/assets/ecopontoverde.png';
 import lixoOrganico from '/src/assets/lixoorganico.png';
 
 const trashItems = [
-  { id: 1, name: 'Papel 🧻', type: 'papel' },
-  { id: 2, name: 'Garrafa Plástico 🧴', type: 'plastico' },
-  { id: 3, name: 'Garrafa Vidro 🍾', type: 'vidro' },
+  { id: 1, name: 'Jornal 📰', type: 'papel' },
+  { id: 2, name: 'Copo Plástico 🥤', type: 'plastico' },
+  { id: 3, name: 'Vaso 🏺', type: 'vidro' },
   { id: 4, name: 'Lata 🥫', type: 'plastico' },
-  { id: 5, name: 'Cartão 📦', type: 'papel' },
-  { id: 6, name: 'Maçã Comida 🍎', type: 'organico' },
+  { id: 5, name: 'Caixa 📦', type: 'papel' },
+  { id: 6, name: 'Casca 🍎', type: 'organico' },
+  { id: 7, name: 'Envelope ✉️', type: 'papel' },
+  { id: 8, name: 'Casca 🍌', type: 'organico' },
+  { id: 9, name: 'Pacote Leite 🥛', type: 'papel' },
+  { id: 10, name: 'Frasco 🧪', type: 'vidro' },
+  { id: 11, name: 'Casca 🥚', type: 'organico' },
+  { id: 12, name: 'Livro 📚', type: 'papel' },
+  { id: 13, name: 'Folha 🥬', type: 'organico' },
+  { id: 14, name: 'Garrafa 💧', type: 'plastico' },
+  { id: 15, name: 'Copo Vidro 🍷', type: 'vidro' },
+  { id: 16, name: 'Papel 📄', type: 'papel' },
+  { id: 17, name: 'Casca 🍊', type: 'organico' },
+  { id: 18, name: 'Pacote 📦', type: 'papel' },
 ];
 
 const bins = [
@@ -38,6 +50,15 @@ const Game = () => {
   const [feedback, setFeedback] = useState('');
   const [score, setScore] = useState(0);
   const [currentFact, setCurrentFact] = useState(0);
+  const [availableItems, setAvailableItems] = useState(trashItems);
+  const [displayedItems, setDisplayedItems] = useState(trashItems.slice(0, 6));
+
+  // Inicializa o jogo com 6 itens aleatórios
+  useEffect(() => {
+    const shuffledItems = [...trashItems].sort(() => Math.random() - 0.5);
+    setDisplayedItems(shuffledItems.slice(0, 6));
+    setAvailableItems(shuffledItems);
+  }, []);
 
   useEffect(() => {
     if (feedback) {
@@ -54,15 +75,48 @@ const Game = () => {
 
   const handleDragStart = (e, item) => {
     e.dataTransfer.setData('trashType', item.type);
+    e.dataTransfer.setData('itemId', item.id.toString());
   };
 
   const handleDrop = (e, bin) => {
     e.preventDefault();
     const trashType = e.dataTransfer.getData('trashType');
+    const itemId = parseInt(e.dataTransfer.getData('itemId'));
 
     if (trashType === bin.accepts) {
       setFeedback('Correto!');
       setScore(score + 1);
+      
+      // Encontra o índice do item que foi reciclado
+      const recycledItemIndex = displayedItems.findIndex(item => item.id === itemId);
+      
+      if (recycledItemIndex !== -1) {
+        // Remove o item reciclado da lista de disponíveis
+        const newAvailableItems = availableItems.filter(item => item.id !== itemId);
+        
+        // Filtra os itens que não estão sendo exibidos atualmente
+        const unusedItems = newAvailableItems.filter(
+          item => !displayedItems.some(displayed => displayed.id === item.id)
+        );
+        
+        if (unusedItems.length > 0) {
+          // Escolhe um novo item aleatório
+          const randomIndex = Math.floor(Math.random() * unusedItems.length);
+          const newItem = unusedItems[randomIndex];
+          
+          // Atualiza a lista de itens exibidos, removendo o item reciclado
+          const newDisplayedItems = displayedItems.filter(item => item.id !== itemId);
+          newDisplayedItems.push(newItem);
+          
+          setDisplayedItems(newDisplayedItems);
+          setAvailableItems(newAvailableItems);
+        } else {
+          // Se não houver mais itens disponíveis, reinicia o jogo com novos itens aleatórios
+          const shuffledItems = [...trashItems].sort(() => Math.random() - 0.5);
+          setDisplayedItems(shuffledItems.slice(0, 6));
+          setAvailableItems(shuffledItems);
+        }
+      }
     } else {
       setFeedback('Errado!');
     }
@@ -83,14 +137,14 @@ const Game = () => {
         </div>
       </div>
 
-      <div className="game-container" style={{ paddingTop: '80px' }}> {/* Ajuste o padding-top conforme necessário */}
+      <div className="game-container" style={{ paddingTop: '80px' }}>
         <div className="game-header">
           <h1 className="game-title">♻️ Jogo da Reciclagem</h1>
           <p className="score">Pontuação: <span className="font-semibold">{score}</span></p>
         </div>
 
         <div className="trash-list">
-          {trashItems.map((item) => (
+          {displayedItems.map((item) => (
             <div
               key={item.id}
               draggable
